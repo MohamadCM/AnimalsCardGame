@@ -1,7 +1,6 @@
 package HW6.Q3;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -114,12 +113,12 @@ public class UserPlayer extends Player{
 
     @Override
     public boolean regainStamina() {
-        if(numberOfRagains == 3)
+        if(numberOfRegains == 3)
         {
             System.out.println("You have no regains left");
             return false;
         }
-        System.out.println("Please choose an animal to attack");
+        System.out.println("Please choose an animal to regain stamina");
         int num;
         while (true){
             try {
@@ -138,87 +137,111 @@ public class UserPlayer extends Player{
         if(animals.get(num).getName().equals("Lion"))
         {
             animals.get(num).setStamina(1000);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Bear"))
         {
             animals.get(num).setStamina(900);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Tiger"))
         {
             animals.get(num).setStamina(850);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         if(animals.get(num).getName().equals("Vulture"))
         {
             animals.get(num).setStamina(650);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         if(animals.get(num).getName().equals("Fox"))
         {
             animals.get(num).setStamina(600);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         if(animals.get(num).getName().equals("Elephant"))
         {
             animals.get(num).setStamina(500);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         if(animals.get(num).getName().equals("Wolf"))
         {
             animals.get(num).setStamina(700);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         if(animals.get(num).getName().equals("Pork"))
         {
             animals.get(num).setStamina(500);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Hippo"))
         {
             animals.get(num).setStamina(360);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Cow"))
         {
             animals.get(num).setStamina(400);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Rabbit"))
         {
             animals.get(num).setStamina(350);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
         if(animals.get(num).getName().equals("Turtle"))
         {
             animals.get(num).setStamina(230);
-            numberOfRagains++;
+            numberOfRegains++;
             return true;
         }
 
         return false;
     }
-
+    /**
+     * Lets the player too choose animals from random cards
+     */
     @Override
     public void chooseNewAnimals() {
-
+        System.out.println("Please choose animals you want(you should select 10 animals)");
+        ArrayList<Animal> finalAnimals = new ArrayList<Animal>();
+        for(int i = 0 ; i < 10 ; i++)
+        {
+            int num;
+            while (true)
+            {
+                try {
+                    Scanner scanner = new Scanner(System.in);
+                    num = scanner.nextInt();
+                }catch (Exception e)
+                {
+                    System.out.println("Wrong input,Try this one again");
+                    Scanner scanner = new Scanner(System.in);
+                    num = scanner.nextInt();
+                }
+                if(num < animals.size() && !finalAnimals.contains(animals.get(num)))
+                    break;
+                System.out.println("Wrong number, try again");
+            }
+            finalAnimals.add(animals.get(num));
+        }
+        animals = finalAnimals;
     }
 
 }

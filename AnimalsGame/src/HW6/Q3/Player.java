@@ -13,15 +13,22 @@ abstract public class Player {
     private String name;
     protected ArrayList<Animal> animals;
     protected Player oppnentPlayer;
-    protected int numberOfRagains;
+    protected int numberOfRegains;
     /**
      * Each player needs name to get created
      * @param name
      */
     protected Player(String name) {
         this.name = name;
-        numberOfRagains = 0;
+        numberOfRegains = 0;
         animals = new ArrayList<Animal>();
+    }
+
+    /**
+     * @return name of player as a String
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -343,5 +350,12 @@ abstract public class Player {
                 counter[11]++;
             }
         }
+    }
+
+    /**
+     * @return number of Stamina regains that has been done
+     */
+    public int getNumberOfRegains() {
+        return numberOfRegains;
     }
 }
