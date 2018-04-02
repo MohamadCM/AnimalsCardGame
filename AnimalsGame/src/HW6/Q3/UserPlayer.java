@@ -17,7 +17,7 @@ public class UserPlayer extends Player{
     }
     private ArrayList<Animal> chooseAnimals()
     {
-        System.out.println("Please choose animals to attack, use something other than integer numbers to finish");
+        System.out.println("Please choose animals to attack with, use something other than integer numbers to finish;");
         ArrayList<Animal> outAnimals = new ArrayList<Animal>();
         while (true)
         {
@@ -42,7 +42,7 @@ public class UserPlayer extends Player{
     public void chooseAttack()
     {
         ArrayList<Animal> outAnimals = chooseAnimals();
-        System.out.println("Please select an animal to attack");
+        System.out.println("Please select an animal to attack to,");
         int animalToAttack;
         while (true)
         {
@@ -74,6 +74,37 @@ public class UserPlayer extends Player{
             outAnimals = chooseAnimals();
         }
 
+    }
+
+    private boolean doAttack(int enemyAnimalNumber, ArrayList<Animal> givenAnimals, String attackType) {
+        int sumOfPowers = 0;
+        for(int i = 0 ; i < givenAnimals.size() ; i++)
+        {
+            if(attackType.equals(givenAnimals.get(i).getAttackType1())) {
+                if(givenAnimals.get(i).getAttackType1Power() >= givenAnimals.get(i).getStamina())
+                {
+                    System.out.println("Insufficient stamina");
+                    return false;
+                }
+                sumOfPowers += givenAnimals.get(i).getAttackType1Power();
+            }
+            else if(attackType.equals(givenAnimals.get(i).getAttackType2())) {
+                if(givenAnimals.get(i).getAttackType2Power() >= givenAnimals.get(i).getStamina())
+                {
+                    System.out.println("Insufficient stamina");
+                    return false;
+                }
+                sumOfPowers += givenAnimals.get(i).getAttackType2Power();
+            }
+            else
+                return false;
+        }
+        oppnentPlayer.getAnimals().get(enemyAnimalNumber).setHealth(oppnentPlayer.getAnimals().get(enemyAnimalNumber).getHealth() - sumOfPowers) ;
+        for(int i = 0 ; i < givenAnimals.size() ; i++)
+        {
+            givenAnimals.get(i).setStamina(givenAnimals.get(i).getStamina() - (sumOfPowers / givenAnimals.size()));
+        }
+        return true;
     }
 
     @Override
@@ -178,37 +209,6 @@ public class UserPlayer extends Player{
         }
 
         return false;
-    }
-
-    private boolean doAttack(int enemyAnimalNumber, ArrayList<Animal> givenAnimals, String attackType) {
-        int sumOfPowers = 0;
-        for(int i = 0 ; i < givenAnimals.size() ; i++)
-        {
-            if(attackType.equals(givenAnimals.get(i).getAttackType1())) {
-                if(givenAnimals.get(i).getAttackType1Power() <= givenAnimals.get(i).getStamina())
-                {
-                    System.out.println("Insufficient stamina");
-                    return false;
-                }
-                sumOfPowers += givenAnimals.get(i).getAttackType1Power();
-            }
-            else if(attackType.equals(givenAnimals.get(i).getAttackType2())) {
-                if(givenAnimals.get(i).getAttackType2Power() <= givenAnimals.get(i).getStamina())
-                {
-                    System.out.println("Insufficient stamina");
-                    return false;
-                }
-                sumOfPowers += givenAnimals.get(i).getAttackType2Power();
-            }
-            else
-                return false;
-        }
-        oppnentPlayer.getAnimals().get(enemyAnimalNumber).setHealth(oppnentPlayer.getAnimals().get(enemyAnimalNumber).getHealth() - sumOfPowers) ;
-        for(int i = 0 ; i < givenAnimals.size() ; i++)
-        {
-            givenAnimals.get(i).setStamina(givenAnimals.get(i).getStamina() - (sumOfPowers / givenAnimals.size()));
-        }
-        return true;
     }
 
 }
