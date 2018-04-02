@@ -63,7 +63,7 @@ abstract public class Player {
         System.out.println();
         for(int i = 0 ; i < animals.size() ; i++)
         {
-            System.out.printf("|Name:%13s|",animals.get(i).getName());
+            System.out.printf("|Name:%10s(%d)|",animals.get(i).getName(),i);
             System.out.print("    ");
         }
         System.out.println();
@@ -76,7 +76,7 @@ abstract public class Player {
 
         for(int i = 0 ; i < animals.size() ; i++)
         {
-            System.out.printf("|%sStamina:%10s%s|","\u001B[32m",animals.get(i).getHealth(),"\u001B[0m");
+            System.out.printf("|%sStamina:%10s%s|","\u001B[32m",animals.get(i).getStamina(),"\u001B[0m");
             System.out.print("    ");
         }
         System.out.println();
@@ -119,6 +119,7 @@ abstract public class Player {
                 System.out.print("-");
             System.out.print("    ");
         }
+        System.out.println();
     }
 
     /**
@@ -126,4 +127,27 @@ abstract public class Player {
      * @return {@code true} if the process is successful, {@code false} otherwise
      */
     abstract public boolean regainStamina();
+
+    /**
+     * Updates stats of animals, like removing the dead ones
+     */
+    public void updateAnimals()
+    {
+        for(int i = 0 ; i < animals.size() ; i++)
+        {
+            if(animals.get(i).getHealth() <= 0)
+                animals.remove(i);
+        }
+    }
+
+    /**
+     * Checks whether current player won the game or not
+     * @return {@code true} if the player is Won, {@code false} otherwise
+     */
+    public boolean isWon()
+    {
+        if(oppnentPlayer.animals.size() == 0)
+            return true;
+        return false;
+    }
 }

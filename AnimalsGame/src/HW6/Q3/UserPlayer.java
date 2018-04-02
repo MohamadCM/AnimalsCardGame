@@ -78,7 +78,105 @@ public class UserPlayer extends Player{
 
     @Override
     public boolean regainStamina() {
+        if(numberOfRagains == 3)
+        {
+            System.out.println("You have no regains left");
+            return false;
+        }
         System.out.println("Please choose an animal to attack");
+        int num;
+        while (true){
+            try {
+                Scanner scanner = new Scanner(System.in);
+                num = scanner.nextInt();
+            }catch (Exception e)
+            {
+                System.out.println("Wrong input, try again");
+                Scanner scanner = new Scanner(System.in);
+                num = scanner.nextInt();
+            }
+            if(num < animals.size())
+                break;
+            System.out.println("Wrong input, try again");
+        }
+        if(animals.get(num).getName().equals("Lion"))
+        {
+            animals.get(num).setStamina(1000);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Bear"))
+        {
+            animals.get(num).setStamina(900);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Tiger"))
+        {
+            animals.get(num).setStamina(850);
+            numberOfRagains++;
+            return true;
+        }
+
+        if(animals.get(num).getName().equals("Vulture"))
+        {
+            animals.get(num).setStamina(650);
+            numberOfRagains++;
+            return true;
+        }
+
+        if(animals.get(num).getName().equals("Fox"))
+        {
+            animals.get(num).setStamina(600);
+            numberOfRagains++;
+            return true;
+        }
+
+        if(animals.get(num).getName().equals("Elephant"))
+        {
+            animals.get(num).setStamina(500);
+            numberOfRagains++;
+            return true;
+        }
+
+        if(animals.get(num).getName().equals("Wolf"))
+        {
+            animals.get(num).setStamina(700);
+            numberOfRagains++;
+            return true;
+        }
+
+        if(animals.get(num).getName().equals("Pork"))
+        {
+            animals.get(num).setStamina(500);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Hippo"))
+        {
+            animals.get(num).setStamina(360);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Cow"))
+        {
+            animals.get(num).setStamina(400);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Rabbit"))
+        {
+            animals.get(num).setStamina(350);
+            numberOfRagains++;
+            return true;
+        }
+        if(animals.get(num).getName().equals("Turtle"))
+        {
+            animals.get(num).setStamina(230);
+            numberOfRagains++;
+            return true;
+        }
+
         return false;
     }
 
