@@ -1,5 +1,7 @@
 package HW6.Q3;
 
+import java.awt.*;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -66,8 +68,11 @@ public class GameManger {
                         break;
                     System.out.println("Wrong input, try again!");
                 }
-                if (flag2 == 2)
-                    userPlayer1.regainStamina();
+                if (flag2 == 2) {
+                    if(!userPlayer1.regainStamina())
+                        System.out.println("Unable to regain stamina, switching to attack");
+                    flag2 = 1;
+                }
                 if (flag2 == 1)
                     userPlayer1.chooseAttack();
                 if (userPlayer1.isWon())
@@ -95,8 +100,11 @@ public class GameManger {
                         break;
                     System.out.println("Wrong input, try again!");
                 }
-                if (flag2 == 2)
-                    userPlayer2.regainStamina();
+                if (flag2 == 2) {
+                    if(!userPlayer2.regainStamina())
+                        System.out.println("Unable to regain stamina, switching to attack");
+                    flag2 = 1;
+                }
                 if (flag2 == 1)
                     userPlayer2.chooseAttack();
                 if (userPlayer2.isWon())
@@ -108,6 +116,82 @@ public class GameManger {
                 System.out.println(userPlayer1.getName() + " Won the game");
             else
                 System.out.println(userPlayer2.getName() + " Won the game");
+        }
+        else if(flag == 2)
+        {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter Player1's name:");
+            UserPlayer userPlayer1 = new UserPlayer(scanner.next());
+            AIPlayer aiPlayer = new AIPlayer();
+            userPlayer1.randomFeedAnimals();
+            aiPlayer.randomFeedAnimals();
+            userPlayer1.printCards();
+            System.out.println(userPlayer1.getName() + "'s turn to choose cards");
+            userPlayer1.chooseNewAnimals();
+            aiPlayer.printCards();
+            System.out.println(aiPlayer.getName() + "'s turn to choose cards");
+            aiPlayer.chooseNewAnimals();
+            userPlayer1.setOppnentPlayer(aiPlayer);
+            aiPlayer.setOppnentPlayer(userPlayer1);
+            for(int i = 0 ; i < 500 ; i++)
+                System.out.println();
+            while (true)
+            {
+                userPlayer1.printCards();
+                aiPlayer.printCards();
+                System.out.println(userPlayer1.getName() + "'s turn");
+                System.out.println("What do want to do?!\n1- Attack 2- Regain Stamina");
+                int flag2;
+                while (true)
+                {
+                    try {
+                        Scanner scanner2 = new Scanner(System.in);
+                        flag2 = scanner.nextInt();
+                    }catch (Exception e)
+                    {
+                        System.out.println("Wrong input, try again!");
+                        Scanner scanner2 = new Scanner(System.in);
+                        flag2 = scanner.nextInt();
+                    }
+                    if (flag2 == 1 || flag2 == 2)
+                        break;
+                    System.out.println("Wrong input, try again!");
+                }
+                if (flag2 == 2) {
+                    if(!userPlayer1.regainStamina())
+                        System.out.println("Unable to regain stamina, switching to attack");
+                        flag2 = 1;
+                }
+                if (flag2 == 1)
+                    userPlayer1.chooseAttack();
+                if (userPlayer1.isWon())
+                    break;
+                for (int i = 0 ; i < 100 ; i++)
+                    System.out.println();
+                userPlayer1.updateAnimals();
+                aiPlayer.updateAnimals();
+                userPlayer1.printCards();
+                aiPlayer.printCards();
+                System.out.println(aiPlayer.getName() + "'s turn");
+                Random random = new Random();
+                flag2 = random.nextInt(2) + 1;
+                if (flag2 == 2) {
+                    if(!aiPlayer.regainStamina())
+                        flag2 = 1;
+                }
+                if (flag2 == 1)
+                    aiPlayer.chooseAttack();
+                if (aiPlayer.isWon())
+                    break;
+                userPlayer1.updateAnimals();
+                aiPlayer.updateAnimals();
+            }
+            if (userPlayer1.isWon())
+                System.out.println(userPlayer1.getName() + " Won the game");
+            else
+                System.out.println(aiPlayer.getName() + " Won the game");
+            for (int i = 0 ; i < 100 ; i++)
+                System.out.println();
         }
     }
 }

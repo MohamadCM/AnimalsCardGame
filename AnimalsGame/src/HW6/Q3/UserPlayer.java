@@ -85,7 +85,7 @@ public class UserPlayer extends Player{
         for(int i = 0 ; i < givenAnimals.size() ; i++)
         {
             if(attackType.equals(givenAnimals.get(i).getAttackType1())) {
-                if(givenAnimals.get(i).getAttackType1Power() >= givenAnimals.get(i).getStamina())
+                if(givenAnimals.get(i).getAttackType1Power() > givenAnimals.get(i).getStamina())
                 {
                     System.out.println("Insufficient stamina");
                     return false;
@@ -93,7 +93,7 @@ public class UserPlayer extends Player{
                 sumOfPowers += givenAnimals.get(i).getAttackType1Power();
             }
             else if(attackType.equals(givenAnimals.get(i).getAttackType2())) {
-                if(givenAnimals.get(i).getAttackType2Power() >= givenAnimals.get(i).getStamina())
+                if(givenAnimals.get(i).getAttackType2Power() > givenAnimals.get(i).getStamina())
                 {
                     System.out.println("Insufficient stamina");
                     return false;
