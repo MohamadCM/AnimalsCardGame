@@ -1,6 +1,7 @@
 package HW6.Q3;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -34,6 +35,8 @@ public class UserPlayer extends Player{
                 System.out.println("Wrong numbers, try again");
                 continue;
             }
+            if(outAnimals.contains(animals.get(num)))
+                continue;
             outAnimals.add(animals.get(num));
         }
         return outAnimals;
@@ -77,6 +80,8 @@ public class UserPlayer extends Player{
     }
 
     private boolean doAttack(int enemyAnimalNumber, ArrayList<Animal> givenAnimals, String attackType) {
+        if(attackType.equals("-"))
+            return false;
         int sumOfPowers = 0;
         for(int i = 0 ; i < givenAnimals.size() ; i++)
         {
@@ -209,6 +214,11 @@ public class UserPlayer extends Player{
         }
 
         return false;
+    }
+
+    @Override
+    public void chooseNewAnimals() {
+
     }
 
 }

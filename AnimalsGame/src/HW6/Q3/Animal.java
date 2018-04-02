@@ -133,4 +133,12 @@ public class Animal {
             return true;
         return false;
     }
+
+    /**
+     * Sets attack type 2 power
+     * @param attackType2Power
+     */
+    public void setAttackType2Power(int attackType2Power) {
+        this.attackType2Power = attackType2Power;
+    }
 }
