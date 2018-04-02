@@ -29,6 +29,11 @@ public class UserPlayer extends Player{
                 System.out.println("Stopping the process");
                 break;
             }
+            if(num >= animals.size())
+            {
+                System.out.println("Wrong numbers, try again");
+                continue;
+            }
             outAnimals.add(animals.get(num));
         }
         return outAnimals;
@@ -68,8 +73,16 @@ public class UserPlayer extends Player{
             System.out.println("Unable to attack please change animals and attack type");
             outAnimals = chooseAnimals();
         }
+
     }
-    public boolean doAttack(int enemyAnimalNumber, ArrayList<Animal> givenAnimals, String attackType) {
+
+    @Override
+    public boolean regainStamina() {
+        System.out.println("Please choose an animal to attack");
+        return false;
+    }
+
+    private boolean doAttack(int enemyAnimalNumber, ArrayList<Animal> givenAnimals, String attackType) {
         int sumOfPowers = 0;
         for(int i = 0 ; i < givenAnimals.size() ; i++)
         {
@@ -99,4 +112,5 @@ public class UserPlayer extends Player{
         }
         return true;
     }
+
 }
