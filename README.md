@@ -1,2 +1,2 @@
 # AnimalsCardGame
-Simple animals card game created with java :)
+A simple CLI animals card game created with Java as a practice for "Advanced programming" course.
